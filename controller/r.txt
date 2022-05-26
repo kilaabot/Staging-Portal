@@ -1,0 +1,260 @@
+<?php
+include('../config/config.php'); 
+ 
+if(isset($_POST['updaterole']))
+{
+
+    $m_modules    = $_POST['m_module']; 
+    $m_ctrls     = $_POST['m_ctrl']; 
+    $m_info     = $_POST['m_info1'];
+    $m_info1 = $_POST['m_info'];
+
+   $sql = "SELECT * FROM userpri WHERE m_info='$m_info'";
+            $result = mysqli_query($conn, $sql);
+
+        if (!$result->num_rows > 0) {
+
+
+        $query = "UPDATE userpri SET m_info='$m_info' WHERE m_info='$m_info1' ";
+
+        $query_run = mysqli_query($conn, $query);
+
+
+        if($query_run)  {
+             echo '<script> 
+              window.location = "../view-roles.php"; 
+              </script>'; 
+
+              $name_no = array_combine($m_modules, $m_ctrls);
+
+              foreach ($name_no as $m_module => $m_ctrl) {
+    echo "$m_module -> $m_ctrl";
+
+    $res = mysqli_query($conn,"insert into userpri(m_module,m_ctrl,m_info) values('$m_module','$m_ctrl','$m_info')");
+
+        if(!$res)
+            echo "Record not Inserted";
+        else
+            echo "<script>
+        window.location = '../view-roles.php';</script>";
+        ?><br/><?php
+
+    }
+
+    mysqli_close($conn);
+
+          
+        }else {
+
+             echo '<script> alert("Data Not Updated !!"); </script>'; 
+
+        }
+
+
+
+        } else {
+            
+
+        echo '<script> alert("The Role already existing in the database");
+         window.location = "../view-roles.php";</script>'; 
+
+
+   }
+}
+
+
+  if(isset($_POST['m_id'])){
+        foreach ($_POST['m_id'] as $m_id):
+            mysqli_query($conn,"delete from userpri where m_id='$m_id'");
+        endforeach;
+        
+        // EC
+        // header('location:../view-roles.php');
+
+        echo '<script> 
+              window.location = "../view-roles.php"; 
+              </script>'; 
+    }
+    else{
+        ?>
+        <script>
+
+            window.location.href='../view-roles.php';
+        </script>
+        <?php
+    }
+
+
+?>
+
+
+
+
+<?php  
+
+include('../config/config.php'); 
+
+
+
+        if(isset($_POST['updaterole']))
+    {
+
+
+         $m_info = $_POST['m_info1'];
+         $m_info1 = $_POST['m_info'];
+         $m_modules    = $_POST['m_module']; 
+         $m_ctrls     = $_POST['m_ctrl']; 
+
+
+        $sql = "SELECT * FROM userpri WHERE m_info='$m_info'";
+            $result = mysqli_query($conn, $sql);
+
+        if (!$result->num_rows > 0) {
+
+
+        $query = "UPDATE userpri SET m_info='$m_info' WHERE m_info='$m_info1' ";
+
+        $query_run = mysqli_query($conn, $query);
+        
+
+        if($query_run)  {
+             echo '<script> 
+              window.location = "../view-roles.php"; 
+              </script>'; 
+          
+        }else {
+
+             echo '<script> alert("Data Not Updated !!"); </script>'; 
+
+        }
+
+            
+        } else {
+            
+            
+        echo '<script>  window.location = "../view-roles.php";  </script>'; 
+
+
+   }
+
+}
+
+
+    if(isset($_POST['m_id'])){
+        foreach ($_POST['m_id'] as $m_id):
+            mysqli_query($conn,"delete from userpri where m_id='$m_id'");
+        endforeach;
+        
+        // EC
+        // header('location:../view-roles.php');
+
+        echo '<script> 
+              window.location = "../view-roles.php"; 
+              </script>'; 
+    }
+    else{
+        ?>
+        <script>
+
+            window.location.href='../view-roles.php';
+        </script>
+        <?php
+    }
+
+
+    if(isset($_POST['updaterole']))
+{
+
+    $m_modules    = $_POST['m_module']; 
+    $m_ctrls     = $_POST['m_ctrl']; 
+    $m_info     = $_POST['m_info1'];
+
+    $name_no = array_combine($m_modules, $m_ctrls);
+
+
+    
+
+    foreach ($name_no as $m_module => $m_ctrl) {
+
+    echo "$m_module -> $m_ctrl";
+
+    $query = "INSERT INTO userpri (m_module,m_ctrl,m_info) VALUES ('$m_module','$m_ctrl','$m_info')";
+
+    $res = mysqli_query($conn, $query);
+
+        if(!$res)
+            echo "Record not Inserted";
+        else
+            echo "<script>
+        window.location = '../view-roles.php';</script>";
+
+
+        ?><br/><?php
+
+    }
+
+    mysqli_close($conn);
+    
+}
+
+
+
+?>
+
+
+
+
+
+
+<?php  
+
+include('../config/config.php'); 
+
+
+
+        if(isset($_POST['updaterole']))
+    {
+
+
+         $m_info = $_POST['m_info1'];
+         $m_info1 = $_POST['m_info'];
+         $m_modules    = $_POST['m_module']; 
+         $m_ctrls     = $_POST['m_ctrl']; 
+          
+              $sql = "SELECT * FROM userpri WHERE m_info='$m_info'";
+              $result = mysqli_query($conn, $sql);
+              if (!$result->num_rows > 0) {
+                     $query = "UPDATE userpri SET m_info='$m_info' WHERE m_info='m_info1' ";
+                        $query_run = mysqli_query($conn, $query);
+
+                     if ($query_run) {
+
+                                echo '<script> 
+                                  window.location = "../view-roles.php"; 
+                                  </script>'; 
+
+                     } else {
+                            echo "<script>alert('Woops! Something Wrong Went.')</script>";
+                     }
+              } else {
+                     // echo "<script>alert('Woops! Role Already Exists.')
+                     //  window.location = '../view-roles.php'; </script>";
+
+                       echo '<script> alert("Woops! Role Already Exists.");
+                                  window.location = "../view-roles.php"; 
+                                  </script>'; 
+              }
+              
+    
+
+    
+}
+
+
+
+
+
+?>
+
+
+
